@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import UserContex from './UserContex/UserContex';
+import { ToastContainer } from 'react-toastify';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+
+  <UserContex>
+    <React.StrictMode>
+      <ToastContainer position='top-center'></ToastContainer>
+      <App />
+    </React.StrictMode>
+  </UserContex>
 );
 
 // If you want to start measuring performance in your app, pass a function
