@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContex } from '../../UserContex/UserContex';
 
 const Header = () => {
+
+  const {users, logOut} = useContext(AuthContex)
   return (
     <div className="navbar bg-base-100 ">
       <div className="navbar-start">
@@ -18,15 +21,29 @@ const Header = () => {
         <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li> <NavLink to={'/home'}>Home</NavLink> </li>
-          <li><NavLink to={'/login'}>Login</NavLink></li>
-          <li><NavLink to={'/register'}>Register</NavLink></li>
-          <li><Link>Logout</Link></li>
-        </ul>
+        <div className="menu menu-horizontal px-1">
+          <NavLink to={'/home'}>Home</NavLink>
+
+          {users?.uid ?
+            <Link  className={' ms-5'}  onClick={logOut}>Logout</Link>
+            :
+            <> <NavLink  className={' ms-5'}  to={'/login'}>Login</NavLink>
+          <NavLink  className={' ms-5'}  to={'/register'}>Register</NavLink></>
+           }
+
+
+        </div>
       </div>
+
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <div className=' me-5'>
+          <p>{ users?.displayName}</p>
+        </div>
+        <div className="avatar">
+          <div className=" w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <img src="https://st4.depositphotos.com/36066904/38346/v/450/depositphotos_383467124-stock-illustration-hacker-laptop-computer-try-steal.jpg" />
+          </div>
+        </div>
       </div>
     </div>
   );
