@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HomeCategory = ({ catagory }) => {
     const { title, discreption, img, bed, price, person } = catagory
@@ -24,7 +25,8 @@ const HomeCategory = ({ catagory }) => {
     <h2 className="card-title">{title}</h2>
     <p>{discreption}</p>
     <div className="card-actions">
-      <button className="btn btn-primary">Book Now</button>
+      <Link to={'/profile'}><button className="btn btn-primary">Book Now</button></Link>
+
     </div>
   </div>
 </div>

@@ -1,9 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContex } from '../../UserContex/UserContex';
 import { toast } from 'react-toastify';
 
 const Register = () => {
     const { emailVerify, setUsers, userUpdate } = useContext(AuthContex)
+    // const [regLoding, setRegLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
+
+    // if (regLoding) {
+    //     return setLoading(<p>iam loading</p>)
+    // }
+
     const formHandeler = event => {
         event.preventDefault();
         const form = event.target;
@@ -16,7 +23,8 @@ const Register = () => {
                 // Signed in
                 const user = userCredential.user;
                 // setUsers(user)
-                console.log(user);
+                // console.log(user);
+                // setRegLoading(false)
                 toast.success('regitraition successfully done')
                 // ...
                 userUpdate(name)
@@ -35,6 +43,9 @@ const Register = () => {
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
+                {/* <div>
+                    {loading}
+                </div> */}
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Register now!</h1>
                     <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda <br></br> excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>

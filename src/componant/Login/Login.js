@@ -1,10 +1,18 @@
 import React, { useContext } from 'react';
 import { AuthContex } from '../../UserContex/UserContex';
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
+
 
 const Login = () => {
 
     const { login } = useContext(AuthContex)
+    const navigate = useNavigate()
+    let location = useLocation();
+
+
+    let from = location.state?.from?.pathname || "/";
 
     const loginFormHandle = (event) => {
         event.preventDefault();
@@ -17,6 +25,9 @@ const Login = () => {
                 // Signed in
                 // const user = userCredential.user;
                 toast.success('log in sucess')
+                form.reset()
+                navigate(from, { replace: true })
+                // Navigate('/')
                 // ...
             })
             .catch((error) => {

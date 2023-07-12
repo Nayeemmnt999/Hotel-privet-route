@@ -8,25 +8,30 @@ export const AuthContex = createContext();
 
 const UserContex = ({ children }) => {
 
-    const [users, setUsers] = useState()
+    const [users, setUsers] = useState(null)
+    const [loading, setLoading] = useState(true)
 // emial register with email and pass-------------------------------------------------------------
     const emailVerify = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     // sign in with email password
 
     const login = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
 // user update-----------------------------------------------------------------------
     const userUpdate = (name) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, { displayName: name })
     }
     // signOut section---------------------------------------------------------------=
     const logOut = () => {
         return signOut(auth)
+        // setLoading(true)
             .then(() => {
                 toast.success("Log Out success")
             })
@@ -34,14 +39,15 @@ const UserContex = ({ children }) => {
     // on auth state chang----------------------------------------------------------
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            setUsers(currentUser)
+            setUsers(currentUser);
+            setLoading(false)
         })
         return () => {
             unSubscribe()
         }
     },[])
 
-    const authValue = {emailVerify, login,  setUsers, users,  userUpdate, logOut}
+    const authValue = {emailVerify, login,  setUsers, users,  userUpdate, logOut, loading}
     return (
         <AuthContex.Provider value={authValue}>
             {children}
