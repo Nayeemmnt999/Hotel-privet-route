@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContex } from '../../UserContex/UserContex';
 import { toast } from 'react-toastify';
 import { sendEmailVerification } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const { emailVerify, auth, userUpdate } = useContext(AuthContex)
@@ -34,7 +35,7 @@ const Register = () => {
 
                 sendEmailVerification(auth.currentUser)
                     .then(() => {
-                        toast.warning('veryfy your email')
+                        toast.warning('Go to mail box and veryfy your email')
                     });
 
             })
@@ -54,7 +55,7 @@ const Register = () => {
                 </div> */}
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Register now!</h1>
-                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda <br></br> excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda <br></br> excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi. <Link to={'/login'}> <p className=' text-green-500 text-lg'>! Login Now</p> </Link> </p>
                 </div>
                 <div className="divider divider-horizontal "><p className=' rotate-90 text-blue-300'> NAYEEM </p> </div>
 

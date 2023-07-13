@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { AuthContex } from '../../UserContex/UserContex';
 import { toast } from 'react-toastify';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 // import { Navigate } from 'react-router-dom';
 
 
 const Login = () => {
 
-    const { login } = useContext(AuthContex)
+    const { login, users } = useContext(AuthContex)
     const navigate = useNavigate()
     let location = useLocation();
 
@@ -24,9 +24,17 @@ const Login = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
+                form.reset()
                 console.log(user);
                 toast.success('log in sucess')
-                form.reset()
+                if (user.emailVerified) {
+                    return toast.success('Email Verified')
+                }
+                else {
+                    return toast.error('email Unverified')
+                }
+
+
                 navigate(from, { replace: true })
                 // Navigate('/')
                 // ...
@@ -44,7 +52,7 @@ const Login = () => {
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Login now!</h1>
-                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda <br></br> excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda <br></br> excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi. <Link to={'/register'}> <p className=' text-rose-500 text-lg'> ! Register Now</p></Link></p>
                 </div>
                 <div className="divider divider-horizontal "><p className=' rotate-90 text-blue-300'> NAYEEM </p> </div>
 
