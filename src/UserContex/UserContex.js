@@ -47,7 +47,7 @@ const UserContex = ({ children }) => {
         }
     },[])
 
-    const authValue = {emailVerify, login,  setUsers, users,  userUpdate, logOut, loading}
+    const authValue = {emailVerify, login,  setUsers, users,  userUpdate, logOut, loading, auth}
     return (
         <AuthContex.Provider value={authValue}>
             {children}

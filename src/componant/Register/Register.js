@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AuthContex } from '../../UserContex/UserContex';
 import { toast } from 'react-toastify';
+import { sendEmailVerification } from 'firebase/auth';
 
 const Register = () => {
-    const { emailVerify, setUsers, userUpdate } = useContext(AuthContex)
+    const { emailVerify, auth, userUpdate } = useContext(AuthContex)
     // const [regLoding, setRegLoading] = useState(true)
     // const [loading, setLoading] = useState(true)
 
@@ -22,15 +23,20 @@ const Register = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                // setUsers(user)
-                // console.log(user);
-                // setRegLoading(false)
+                console.log(user);
                 toast.success('regitraition successfully done')
-                // ...
+                // ...Update name -------------------------------------------
                 userUpdate(name)
                     .then(() => {
                         toast.success('Name Updated')
                     })
+                // emailVerify --------------------------------------------------
+
+                sendEmailVerification(auth.currentUser)
+                    .then(() => {
+                        toast.warning('veryfy your email')
+                    });
+
             })
             .catch((error) => {
                 const errorCode = error.code;

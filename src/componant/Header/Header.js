@@ -37,7 +37,7 @@ const Header = () => {
 
       <div className="navbar-end">
         <div className=' me-5'>
-          <p>{ users?.displayName}</p>
+          <Link> <p>{ users?.displayName}</p></Link>
         </div>
         <div className="avatar">
           <div className=" w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">

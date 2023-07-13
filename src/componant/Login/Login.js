@@ -23,7 +23,8 @@ const Login = () => {
         login(email, password)
             .then((userCredential) => {
                 // Signed in
-                // const user = userCredential.user;
+                const user = userCredential.user;
+                console.log(user);
                 toast.success('log in sucess')
                 form.reset()
                 navigate(from, { replace: true })
